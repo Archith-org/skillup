@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -49,7 +51,7 @@ public class StringSnippets {
         System.out.println("Reversed using char array: " + reversedString);
 	}
 	
-	
+	//STRING ROTATION
 	public static void stringRotationCheck() {
 		String str1 = "abcd"; //monday
 		String str2 = "bcda"; //cdab, dabc, ymonda
@@ -67,6 +69,36 @@ public class StringSnippets {
 			}
 		}
 		
+	}
+	
+	//Check COMMON CHARS IN SUB STRING
+	public static void checkCharInSubString() {
+		String originalString = "ABCDQWE197RTY";
+		String subString = "AQWEB9CSTY";
+		Set<Character> commonChars = new HashSet<Character>();
+		
+		for(int i = 0; i<originalString.length();i++) {
+			char ch = originalString.charAt(i);
+			if(subString.indexOf(ch) != -1) {
+				commonChars.add(ch);
+			}
+		}
+		
+		if(!commonChars.isEmpty()) {
+			//FOR SORTING ASC
+			Set<Character> commonCharsSorted = new TreeSet<Character>();
+			commonCharsSorted.addAll(commonChars);
+			
+			//FOR SORTING DESC
+			Set<Character> commonCharsSortedReversed = new TreeSet<Character>(Collections.reverseOrder());
+			commonCharsSortedReversed.addAll(commonCharsSorted);
+			
+			System.out.println("Common CHARS found in substring are: " + commonCharsSortedReversed);
+		}
+		else {
+			System.out.println("NO Common CHARS found in substring ");
+		}
+			
 		
 	}
 	
@@ -191,7 +223,7 @@ public class StringSnippets {
 				.map(String::toLowerCase)
 				.filter(c -> c.startsWith("s"))
 				.collect(Collectors.toList());
-		System.out.println("List Starts with : " + li.toString());
+		System.out.println("List Starts with s: " + li.toString());
 	}
 	
 	public static void streamCheck() {
@@ -270,10 +302,35 @@ public class StringSnippets {
 		
 		//Desceding Order Java 8
 		List descedingList = li.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+//		                                       (Collections.reverseOrder())
 		
 		System.out.println("Original List without sort: " + li);
 		System.out.println("Asceding Order: " + ascedingList);
 		System.out.println("Desceding Order: " + descedingList);
+	}
+	
+	//ODD EVEN
+	public static void checkOddEven() {
+		
+		//Check Middle Element in Even or Odd values:
+		List<String> list = Arrays.asList("A", "B", "D", "E"); 
+		int size = list.size();
+		int num = size;
+		
+		int midRightIndex = size / 2; // This gives RIGHT middle
+		int midLeftIndex = (size - 1) / 2; // This gives LEFT middle
+	    
+		
+	    if (size == 0) {System.out.println("List size is: " + size);}
+	    
+		if(num%2 == 0) {
+			System.out.println("Even Number: " + num);
+		}
+		else {
+			System.out.println("Odd Number: " + num);
+		}
+	    
+	    System.out.println("Middle Element: " + list.get(midRightIndex));
 	}
 	
 	
@@ -303,6 +360,121 @@ public class StringSnippets {
 		}
 	}
 	
+	public static void countVowelsConsonants() {
+		String input = "Schandler";
+	    String lower = input.toLowerCase().replaceAll("[^a-z]", "");
+	    long vowels = lower.chars().filter(c -> "aeiou".indexOf(c) != -1).count();
+	    long consonants = lower.length() - vowels;
+	    System.out.println("Vowels: " + vowels +" "+ "Consonants: " + consonants);
+	}
+	
+	//ANAGRAM & PANGRAM
+	public static void checkAnagramAndPangram() {
+		
+		String str1 = "The brown fox jumps quick over the lazy dog";
+	    String str2 = "The brown";
+	    boolean anagram = false;
+	    boolean pangram = false;
+	    if(!str1.isEmpty() && str1.length() == str2.length()) {
+	    	char[] arr1 = str1.toLowerCase().toCharArray();
+		    char[] arr2 = str1.toLowerCase().toCharArray();
+		    
+		    
+		    Arrays.sort(arr1);
+		    Arrays.sort(arr2);
+		    
+		    anagram = Arrays.equals(arr1, arr2);
+
+		    System.out.println("Anagram: "+ anagram + " - Yes it contains atleast one char");
+	    }
+	    else{
+	    	System.out.println("Anagram: "+ anagram + " - Length is not equal to validate");
+	    }
+	    
+	    
+	    if(!str2.isEmpty()) {
+	    	pangram = str2.toLowerCase().chars()
+    							   .filter(Character::isLetter)
+    							   .distinct()
+    							   .count() == 26;
+	    	System.out.println("Pangram: " + pangram + " - Should contain all 26 letters at least once"); 
+	    }
+	    
+	}
+	
+	
+	 public static void getMaxVersion() {
+		 List<String> versions = Arrays.asList("1.1", "12.3.1", "16.0", "11.24.2", "18.1");
+		 
+		 String maxVersion = versions.stream()
+		            				 .max((v1, v2) -> {
+		            					   List<Integer> parts1 = Arrays.stream(v1.split("\\."))
+		                                             .map(Integer::parseInt)
+		                                             .collect(Collectors.toList());
+		            					   List<Integer> parts2 = Arrays.stream(v2.split("\\."))
+		                                             .map(Integer::parseInt)
+		                                             .collect(Collectors.toList());
+		            					   int length = Math.max(parts1.size(), parts2.size());
+		            					   for (int i = 0; i < length; i++) {
+		            						   int num1 = i < parts1.size() ? parts1.get(i) : 0;
+		            						   int num2 = i < parts2.size() ? parts2.get(i) : 0;
+		            						   if (num1 != num2) {
+		            							   return Integer.compare(num1, num2);
+		            						   }
+		            					   }
+		            					   return 0;
+		            				 	})
+		            				 .orElse(null);
+		 
+		 System.out.println("Max Version: " + maxVersion);
+		    }
+	  
+	 //Index Values Match
+	 public static void checkMiddleElement() {
+		 List list = Arrays.asList(1,2,3,4,5);
+		 
+		 //Check only left and right index value with middle index
+		 int midIndex = list.size()/2;
+		 int midValue = (int) list.get(midIndex);
+		 int leftValue = (int) list.get(midIndex-1);
+		 int rightValue = (int) list.get(midIndex+1);
+		 
+		 if((leftValue == midValue) && (rightValue == midValue)) {
+			 System.out.println("Middle index: "+midValue+ " is same as left and right indexes");
+		 }else {
+			 System.out.println("Middle index: "+midValue+ " is NOT same as left and right indexes");
+		 }
+		
+		//Check All left and right index values with middle index
+		int leftSum =0;
+		int rightSum = 0;
+		boolean sumOfindexValue = false;
+		
+		for(int i =0; i<midIndex;i++) {
+			leftSum += (int) list.get(i);
+		}
+		
+		for (int i = midIndex + 1; i < list.size(); i++) {
+            rightSum += (int) list.get(i);
+        }
+		
+		if(leftSum == midValue &&  rightSum == midValue) {
+			sumOfindexValue = true;
+			System.out.println("Both Sum of left and right indexes are matching with midindex value: " + sumOfindexValue);
+		}
+		else if(leftSum == midValue ||  rightSum == midValue){
+			sumOfindexValue = true;
+			System.out.println("Either sum of left or right indexes are matching with midIndex value: " + sumOfindexValue);
+		}
+		else {
+			System.out.println("Any sum of left and right indexes are NOT matching with midIndex value: " + sumOfindexValue);
+		}
+		
+		
+		 
+	 }
+
+	
 	
 	
 
@@ -312,9 +484,10 @@ public class StringSnippets {
 		stringReverse();
 		stringReverseUseChar();
 		stringRotationCheck();
+		checkCharInSubString();
 		removeDuplicateWords();
-		getOnlyDuplicates();
 		removeDuplicateChars();
+		getOnlyDuplicates();
 		getOnlyUnique();
 		firstNonRepeatingChar();
 		nonRepeatingWords();
@@ -323,7 +496,13 @@ public class StringSnippets {
 		streamCheck();
 		findMinMax();
 		getAscendingDescendingOrder();
+		checkOddEven();
 		stringCharsSameCheck();
+		countVowelsConsonants();
+		checkAnagramAndPangram();
+		getMaxVersion();
+		checkMiddleElement();
+		
 	}
 
 	
