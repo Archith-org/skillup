@@ -134,7 +134,18 @@ public class StreamCode {
 		System.out.println("studentTopRankers : " + studentTopRankers );
 	}
 	
-	
+	public static void testStreamCode() {
+		
+		System.out.println("Result: " + employeeList.stream()
+//		.filter(s -> s.getSalary() > 60000)
+//		.map(emp -> new Employee(emp.getEmployeeName().toLowerCase(), emp.getSalary()))
+//		.distinct()
+//		.limit(3)
+//		.skip(2)
+//		.sorted(Comparator.comparingInt(Employee::getId))
+//		.min(Comparator.comparingInt(String::length))
+		.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.minBy(Comparator.comparingDouble(Employee::getSalary).reversed()))));
+	}
 	
 	
 	
@@ -159,6 +170,7 @@ public class StreamCode {
 		lowestInDeptsalary();
 		maxsalaryInDept();
 		getTop5Rankers();
+		testStreamCode();
 	}
 
 }

@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -274,7 +277,27 @@ public class StringSnippets {
 		for(Object specialChar : onlySpecialChars) {
 			onlySpecialCharList.add(specialChar);
 		}
-		System.out.println("Special Chars only: " + onlySpecialCharList.toString());        
+		System.out.println("Special Chars only: " + onlySpecialCharList.toString());
+		
+		//STREAM-TOUPERACSE/TOLOWERCASE
+		List upperCaseList = li.stream()
+		  .map(String::toUpperCase)
+//		  .map(String::toLowerCase)
+		  .toList();
+		System.out.println("Upper case:" + upperCaseList);
+		
+		//STREAM-OCCURANCE OF EACH CHAR
+		String str3 = "Heres the coding path";
+		Map occurance = str3.chars()
+			.mapToObj(ch -> (char) ch)
+			.collect(Collectors.groupingBy(qw -> qw, Collectors.counting()));
+		System.out.println("Char occurances: "+ occurance.entrySet());
+		
+		//STREAM-LENGTH OF CHARS IN WORD
+		String str4 = "FAANG Companies are in top";
+		Map<Object, Integer> lengthMap = Arrays.stream(str4.split(" "))
+			  .collect(Collectors.toMap(word -> word, String::length, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+		System.out.println("Char length in word: " + lengthMap);
 		
 	}
 	
@@ -483,25 +506,42 @@ public class StringSnippets {
 		stringSimpleReverse();
 		stringReverse();
 		stringReverseUseChar();
+		System.out.println("-------------------");
 		stringRotationCheck();
+		System.out.println("-------------------");
 		checkCharInSubString();
+		System.out.println("-------------------");
 		removeDuplicateWords();
 		removeDuplicateChars();
+		System.out.println("-------------------");
 		getOnlyDuplicates();
 		getOnlyUnique();
+		System.out.println("-------------------");
 		firstNonRepeatingChar();
 		nonRepeatingWords();
+		System.out.println("-------------------");
 		stringPalindrome();
+		System.out.println("-------------------");
 		getOnlyStartsWith();
+		System.out.println("-------------------");
 		streamCheck();
+		System.out.println("-------------------");
 		findMinMax();
+		System.out.println("-------------------");
 		getAscendingDescendingOrder();
+		System.out.println("-------------------");
 		checkOddEven();
+		System.out.println("-------------------");
 		stringCharsSameCheck();
+		System.out.println("-------------------");
 		countVowelsConsonants();
+		System.out.println("-------------------");
 		checkAnagramAndPangram();
+		System.out.println("-------------------");
 		getMaxVersion();
+		System.out.println("-------------------");
 		checkMiddleElement();
+		System.out.println("-------------------");
 		
 	}
 
