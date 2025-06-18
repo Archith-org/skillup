@@ -15,7 +15,8 @@ public class StreamCode {
 		    new Employee(3, "Charlie", "IT", 70000),
 		    new Employee(4, "David", "Finance", 40000),
 		    new Employee(5, "Eve", "HR", 55000),
-		    new Employee(6, "Frank", "IT", 80000)
+		    new Employee(6, "Frank", "IT", 80000),
+		    new Employee(7, "Archith", "SENIOR_SOFTWARE_ENGINEER", 2400000)
 		);
 	
 	
@@ -147,6 +148,14 @@ public class StreamCode {
 		.collect(Collectors.groupingBy(Employee::getDepartment, Collectors.minBy(Comparator.comparingDouble(Employee::getSalary).reversed()))));
 	}
 	
+	public static void getEmployeeByDeptSortGroup() {
+		System.out.println("Employee by Dept|Sort|Group: " + 
+	employeeList.stream()
+		.filter(d -> d.getDepartment().equals("SENIOR_SOFTWARE_ENGINEER"))
+		.sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+		.collect(Collectors.groupingBy(Employee::getEmployeeName)));
+	}
+	
 	
 	
 	
@@ -171,6 +180,7 @@ public class StreamCode {
 		maxsalaryInDept();
 		getTop5Rankers();
 		testStreamCode();
+		getEmployeeByDeptSortGroup();
 	}
 
 }
