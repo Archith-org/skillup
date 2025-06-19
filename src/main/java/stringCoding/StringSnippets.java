@@ -120,6 +120,7 @@ public class StringSnippets {
         
         //Using JAVA8
 		List<String> uniqueWordsList = listOfStrings.stream()
+//				.filter(word -> Collections.frequency(listOfStrings, word) == 1) // Used to remove completely  the duplicated words
                 .distinct()
                 .collect(Collectors.toList());
 
