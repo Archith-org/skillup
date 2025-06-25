@@ -156,6 +156,25 @@ public class StreamCode {
 		.collect(Collectors.groupingBy(Employee::getEmployeeName)));
 	}
 	
+	public static void sortEmployeeBySalaryAndRemove4thHighestEmployee() {
+		
+		// Step 1: Sort in descending order
+		List<Employee> sortedList = employeeList.stream()
+					.sorted(Comparator.comparingDouble(Employee::getSalary))
+					.collect(Collectors.toList());
+		
+		// Step 2: Get 4th highest salary (index 3)
+		double fourthHighestSalary = sortedList.get(3).getSalary();
+		
+        // Step 3: Remove employee(s) with 4th highest salary
+		List<Employee> finalList = sortedList.stream()
+	            .filter(emp -> emp.getSalary() != fourthHighestSalary)
+	            .collect(Collectors.toList());
+		
+		System.out.println("Employee 4th Highest Removed: " + finalList);
+//		finalList.forEach(System.out::println);
+	}
+	
 	
 	
 	
@@ -181,6 +200,7 @@ public class StreamCode {
 		getTop5Rankers();
 		testStreamCode();
 		getEmployeeByDeptSortGroup();
+		sortEmployeeBySalaryAndRemove4thHighestEmployee();
 	}
 
 }
