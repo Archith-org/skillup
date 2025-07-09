@@ -107,7 +107,7 @@ public class StringSnippets {
 	
 	
 	
-	//REMOVE DUPLICATES
+	//REMOVE DUPLICATES WORDS
 	public static void removeDuplicateWords() {
 		String duplicatedString = "Apple Banana Orange Apple Sun moon Sun Orange";
 		
@@ -131,6 +131,7 @@ public class StringSnippets {
         System.out.println("String without duplicates - JAVA8: " + result);
 	}
 	
+	//REMOVE DUPLICATE CHARS
 	public static void removeDuplicateChars() {
 		String duplicateStr = "aabcdeef";
 		String uniqueString = duplicateStr.chars()
@@ -168,7 +169,7 @@ public class StringSnippets {
 	}
 	
 	
-	//NON-REPEATING
+	//NON-REPEATING CHARS
 	private static void firstNonRepeatingChar() {
 			String str = "Archith";
 			boolean flag = true;
@@ -184,6 +185,7 @@ public class StringSnippets {
 			}
 	}
 	
+	//NON-REPEATING WORDS
 	public static void nonRepeatingWords() {
 		String str = "Archith, Kumar, Kulkarni, Kumar, JoshGates, BillGates, etc.. Kulkarni + JoshGates";
 		String regEx = ("[ \\,\\+]");
@@ -236,14 +238,17 @@ public class StringSnippets {
 
 		List<String> li = Arrays.asList(str);
 		List<String> li2 = Arrays.asList(strs);
+		
 		//STREAM-COUNT
 		long count = li.stream().count();
 		System.out.println("Stream count: " + count);
+		
 		//STREAM-DISTINCT
 		if(count > 1) {
 			List distinct = li.stream().map(String::toLowerCase).distinct().toList();
 			System.out.println("Stream Distinct: " + distinct);
 		}
+		
 		//STREAM-EQUALS
 		if(count == count) {
 			boolean b = li.stream().equals("dummy");
@@ -252,6 +257,7 @@ public class StringSnippets {
 		//STREAM-DROPWHILE
 		List dropWhile = li.stream().dropWhile(predicate -> !predicate.matches("")).toList();
 		System.out.println("Stream Drop while: " + dropWhile);
+		
 		//STREAM-ONLYALPHA
 		String[] onlyAlpha = Arrays.stream(strs).map(temp -> temp.replaceAll("[^a-zA-Z]", "")).toArray(String[]::new);
 		List onlyAlphaList = new ArrayList<>();
@@ -259,6 +265,7 @@ public class StringSnippets {
 			onlyAlphaList.add(alpha);
 		}
 		System.out.println("Alphabetics only: " + onlyAlphaList.toString());
+		
 		//STREAM-ONLYNUMERIC
 		String[] onlyNumeric = Arrays.stream(strs).map(temp -> temp.replaceAll("[^0-9]", "")).toArray(String[]::new);
 		List onlyNumericList = new ArrayList<>();
@@ -266,6 +273,7 @@ public class StringSnippets {
 			onlyNumericList.add(num);
 		}
 		System.out.println("Numerics only: " + onlyNumericList.toString());
+		
 		//STREAM-ONLYSPECIALCHARS
 		String[] onlySpecialChars = Arrays.stream(strs)
                 .map(temp -> temp.chars()
@@ -300,9 +308,36 @@ public class StringSnippets {
 			  .collect(Collectors.toMap(word -> word, String::length, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 		System.out.println("Char length in word: " + lengthMap);
 		
+		//COMMON ELEMENTS IN ARRAY
+		int[] array1 = {1,2,3,4,6,8,0};
+		int[] array2 = {4,6,7,1,0,3};
+		
+		List commonElementsList = Arrays.stream(array1)
+			  .filter(arr1Num -> Arrays.stream(array2)
+					  .anyMatch(arr2Num -> arr2Num == arr1Num))
+			  .boxed()
+			  .collect(Collectors.toList());
+		
+		System.out.println("commonElements in Arrays: " + commonElementsList);
+		
+		//LONGEST STRING to print Count
+		int longstString = Arrays.stream(str)
+							     .mapToInt(String::length)
+							     .max()
+							     .orElse(0);
+		System.out.println("Longst String COUNT: " + longstString);
+		
+		//Longest STRING To Print Word
+		 Optional<String> longest = Arrays.stream(str)
+	                .max((s1, s2) -> Integer.compare(s1.length(), s2.length()));
+		 longest.ifPresent(s -> System.out.println("Longest string WORD: " + s));
+		
+		
+		
 	}
 	
 	
+	//MIN MAX
 	public static void findMinMax() {
 		List<Integer> li = Arrays.asList(1,2,3,6,8,9,10,15,89,101,500);
 		Optional<Integer>  maxNum = li.stream().max(Integer::compareTo);
@@ -317,6 +352,7 @@ public class StringSnippets {
 		}
 	}
 	
+	//ASC DESC
 	public static void getAscendingDescendingOrder() {
 		
 		List<Integer> li = Arrays.asList(1,240,31,60,8,9,10,105,89,101,50);
@@ -357,7 +393,7 @@ public class StringSnippets {
 	    System.out.println("Middle Element: " + list.get(midRightIndex));
 	}
 	
-	
+	//CHAR SAME CHECK
 	public static void stringCharsSameCheck() {
 		String str1 = "hello";
 		String str2 = "olehl";
@@ -384,6 +420,7 @@ public class StringSnippets {
 		}
 	}
 	
+	//COUNT VOWELS
 	public static void countVowelsConsonants() {
 		String input = "Schandler";
 	    String lower = input.toLowerCase().replaceAll("[^a-z]", "");
@@ -453,7 +490,7 @@ public class StringSnippets {
 		 System.out.println("Max Version: " + maxVersion);
 		    }
 	  
-	 //Index Values Match
+	 //INDEX VALUES MATCH
 	 public static void checkMiddleElement() {
 		 List list = Arrays.asList(1,2,3,4,5);
 		 
