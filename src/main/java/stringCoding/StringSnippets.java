@@ -178,6 +178,8 @@ public class StringSnippets {
 					System.out.println("First Non Repeating Char: " + c);
 					flag = false;
 					break;
+//					System.out.println("Next Non Repeating Char: " + c);
+//					System.out.println("Only Repeating Char: " + c); // Conditon should be changed from == to != in IF block
 				}
 			}
 			if(flag) {
