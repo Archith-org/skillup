@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -532,13 +533,25 @@ public class StringSnippets {
 		else {
 			System.out.println("Any sum of left and right indexes are NOT matching with midIndex value: " + sumOfindexValue);
 		}
-		
-		
+						 
+	 }
+	 
+	 public static void convertStringArrayToMapUsingAutoIncrementKey() {
 		 
+		 String[] strArray = {"abc", "efghij", "qwer"};
+		 AtomicInteger stringIndex = new AtomicInteger(0); // Use for Key as abc
+//	    AtomicInteger numberIndex = new AtomicInteger(1); // Use for Key as 123
+
+	    Map<String, Integer> map = Arrays.stream(strArray)
+	            .collect(Collectors.toMap(
+	                    s -> String.valueOf((char) ('a' + stringIndex.getAndIncrement())), // key: 'a', 'b', 'c'...
+//	                    s -> String.valueOf(numberIndex.getAndIncrement()), // key: "1", "2", "3"
+	                    String::length // value: string length
+	            ));
+
+	    System.out.println("Converted String Array to Map using Auto Increment Key: "+ map); // Output: {a=3, b=7, c=4}
 	 }
 
-	
-	
 	
 
 	public static void main(String[] args) {
@@ -581,6 +594,8 @@ public class StringSnippets {
 		getMaxVersion();
 		System.out.println("-------------------");
 		checkMiddleElement();
+		System.out.println("-------------------");
+		convertStringArrayToMapUsingAutoIncrementKey();
 		System.out.println("-------------------");
 		
 	}
