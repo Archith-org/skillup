@@ -1,4 +1,4 @@
-package stringCoding;
+package coding;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;

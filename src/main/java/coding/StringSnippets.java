@@ -1,4 +1,4 @@
-package stringCoding;
+package coding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
