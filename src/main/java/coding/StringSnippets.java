@@ -551,6 +551,18 @@ public class StringSnippets {
 
 	    System.out.println("Converted String Array to Map using Auto Increment Key: "+ map); // Output: {a=3, b=7, c=4}
 	 }
+	 
+	 public static void sortStringsByLength() {
+		 List<String> unSortedList = List.of("Zebra ", "Apple", "Man", "A dog", "When12", "Archith@org.com");
+		 
+		 List result = unSortedList.stream()
+		 			 .distinct()
+		 			 .sorted(Comparator.comparingInt(String::length)) // For ASC
+//		 			.sorted(Comparator.comparingInt(String::length).reversed()) // For DESC
+		 			 .collect(Collectors.toList());
+		 
+		 System.out.println("Sorted List According to Length: " + result.toString());
+	 }
 
 	
 
@@ -596,6 +608,8 @@ public class StringSnippets {
 		checkMiddleElement();
 		System.out.println("-------------------");
 		convertStringArrayToMapUsingAutoIncrementKey();
+		System.out.println("-------------------");
+		sortStringsByLength();
 		System.out.println("-------------------");
 		
 	}

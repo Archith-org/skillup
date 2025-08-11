@@ -1,5 +1,6 @@
 package coding;
 
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -111,6 +112,60 @@ public class Conversions {
 		));
 		System.out.println("Converted String Array to Map: " + map);
 	}
+	
+	public static void convertWordsToNumbers() {
+		
+		String words = "fifteen crore Six lakh forty thousand eight hundred and ninety two";
+		
+		final Map<String, Integer> numMap = new HashMap<>();
+	    final Map<String, Integer> multMap = new HashMap<>();
+	    
+	     {
+	        numMap.put("one", 1);    numMap.put("two", 2);    numMap.put("three", 3);
+	        numMap.put("four", 4);   numMap.put("five", 5);   numMap.put("six", 6);
+	        numMap.put("seven", 7);  numMap.put("eight", 8);  numMap.put("nine", 9);
+	        numMap.put("ten", 10);   numMap.put("eleven", 11);numMap.put("twelve", 12);
+	        numMap.put("thirteen", 13); numMap.put("fourteen", 14);
+	        numMap.put("fifteen", 15); numMap.put("sixteen", 16);
+	        numMap.put("seventeen", 17); numMap.put("eighteen", 18);
+	        numMap.put("nineteen", 19); numMap.put("twenty", 20);
+	        numMap.put("thirty", 30); numMap.put("forty", 40); numMap.put("fifty", 50);
+	        numMap.put("sixty", 60); numMap.put("seventy", 70);
+	        numMap.put("eighty", 80); numMap.put("ninety", 90);
+
+	        multMap.put("hundred", 100);
+	        multMap.put("thousand", 1000);
+	        // Indian system
+	        multMap.put("lakh", 1_00_000);
+	        multMap.put("crore", 1_00_00_000);
+	        // International system
+	        multMap.put("million", 1000000);
+	        multMap.put("billion", 1000000000);
+	    }
+	     
+	     words = words.toLowerCase().replaceAll("[-]", " ").replaceAll(" and ", " ");
+	        String[] parts = words.split("\\s+");
+
+	        long total = 0;
+	        long current = 0;
+
+	        for (String word : parts) {
+	            if (numMap.containsKey(word)) {
+	                current += numMap.get(word);
+	            } else if (multMap.containsKey(word)) {
+	            	if (current == 0) current = 1;
+	                current *= multMap.get(word);
+	                if (multMap.get(word) >= 1000) {
+	                    total += current;
+	                    current = 0;
+	                }
+	            }
+	        }
+	        long resultedNumber = total + current;
+	        String formattedNumber = NumberFormat.getNumberInstance(Locale.US).format(resultedNumber); // To add Comma (,) to digits.
+	        System.out.println("Converted Words: (" + words + ") To Number:" + " ["+formattedNumber + "] .");   
+	    
+	}
 
 	public static void conversionSummary() {
 		System.out.println("------------CONVERSION BASICS-------------------\r\n"
@@ -133,7 +188,7 @@ public class Conversions {
 		convertListToSet();
 		romanToInteger();
 		convertStringArrayToMap();
-		
+		convertWordsToNumbers();
 		conversionSummary();
 
 	}
