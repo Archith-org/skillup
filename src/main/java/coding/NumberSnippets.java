@@ -165,6 +165,47 @@ public class NumberSnippets {
 	    System.out.println("Longest Consecutive number: " + longest);
 	}
 	
+	public static void longestArray() {
+		int[] originalArray = {3,5,1,19,2,6,0};
+	}
+	
+	public static void checkPalindrome() {
+		int num = 121;
+		int temp = num;
+		int reversed = 0;
+		for(;temp > 0; temp/=10) {
+			reversed = reversed * 10 + temp % 10;
+		}
+			System.out.println(reversed == num? + num + ": " +"Palindrome Number" : "Not Palindrome Number");
+			
+	//Checking Next Palindrome
+		if(num > 0) {
+			num++;
+			while(true) {
+				temp = num;
+				reversed = 0;
+				while(temp > 0) {
+					reversed = reversed * 10 + temp % 10;
+					temp /= 10;
+				}
+				if(reversed == num) {
+					System.out.println("Next Palindrome Number: " + num);
+					
+			//Checking length of number
+					int count = 0;
+					temp = num;
+					while(temp > 0) {
+						count++;
+						temp/=10;
+					}
+					System.out.println("Length of number is: " + count);
+					break;
+				}
+				num++;
+			}
+		}
+	}
+	
 	
 	
 	
@@ -192,6 +233,10 @@ public class NumberSnippets {
 		findMissingNumber();
 		System.out.println("\n-------------------");
 		longestConsecutive();
+		System.out.println("\n-------------------");
+		longestArray();
+		System.out.println("\n-------------------");
+		checkPalindrome();
 		System.out.println("\n-------------------");
 	}
 

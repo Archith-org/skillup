@@ -223,6 +223,7 @@ public class StringSnippets {
 		else {
 			System.out.println("Panlindrome: " + !palindrome);
 		}
+		
 	}
 	
 	public static void getOnlyStartsWith() {
@@ -367,9 +368,17 @@ public class StringSnippets {
 		List descedingList = li.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 //		                                       (Collections.reverseOrder())
 		
+		
+		
 		System.out.println("Original List without sort: " + li);
 		System.out.println("Asceding Order: " + ascedingList);
 		System.out.println("Desceding Order: " + descedingList);
+		
+		for(int i = 0 ; i < ascedingList.size(); i++) {
+			if(ascedingList.get(i).equals(descedingList.get(i))) {
+				System.out.println("Both List matches at number: " + descedingList.get(i));
+			}
+		}
 	}
 	
 	//ODD EVEN
