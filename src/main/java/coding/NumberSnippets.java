@@ -1,12 +1,15 @@
 package coding;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class NumberSnippets {
 
 	public static void checkSumEqualWithAnyPositionCombination() {
-		int[] intArray = { 1, 3, 4, -7, -1, 5, 2, 6, 9, 0, 80, -11 };
+		int[] intArray = { 1, 3, 4, -7,0, -1, 5, 2, 6, 9, 4, 0, 80, -11 };
 		int sum = 5;
 		int sumCombinations = 0;
 
@@ -206,8 +209,20 @@ public class NumberSnippets {
 		}
 	}
 	
-	
-	
+	public static void getTop3Numbers() {
+		int[] nums = {1,2,3,4,5,6,7,11,8,9,10,15,25,28,25};
+		
+		int[] top3 = Arrays.stream(nums)
+			  .boxed()
+			  .distinct()
+			  .sorted(Collections.reverseOrder())
+			  .limit(3)
+//			  .forEach(System.out::println); // TO Directly print number
+//			  .forEach(n -> System.out.println("Top 3 DESC Numbers: " + n)); // TO Customize printing numbers with text
+			  .mapToInt(Integer::intValue)
+			  .toArray();
+		System.out.println("Top 3 DESC Numbers: " + Arrays.toString(top3).replace("[", "{").replace("]", "}"));  // replace is optional just to convert [ to }
+	}
 	
 	
 	
@@ -235,8 +250,9 @@ public class NumberSnippets {
 		longestConsecutive();
 		System.out.println("\n-------------------");
 		longestArray();
-		System.out.println("\n-------------------");
 		checkPalindrome();
+		System.out.println("\n-------------------");
+		getTop3Numbers();
 		System.out.println("\n-------------------");
 	}
 
