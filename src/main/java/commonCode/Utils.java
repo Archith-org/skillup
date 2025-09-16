@@ -113,8 +113,25 @@ public class Utils {
 	}
 	
 	
-	
-	
+	public static String classifyWord(String word) {
+	    if (word.equals(word.toLowerCase())) {
+	        return "SMALL CASE";
+	    } else if (word.equals(word.toUpperCase())) {
+	        return "UPPER CASE";
+	    } else if (Character.isLowerCase(word.charAt(0)) && word.chars().anyMatch(Character::isUpperCase)) {
+	        return "CAMEL CASE";
+	    } else if (Character.isUpperCase(word.charAt(0)) && word.substring(1).equals(word.substring(1).toLowerCase())) {
+	        return "PASCAL CASE";
+	    } else {
+	        return "MIXED CASE";
+	    }
+	}
+
+	public static void runWithSeparator(Runnable task) {
+	    task.run();
+	    System.out.println("------------------");
+	}
+
 	
 	
 	public static void main(String args[]) {

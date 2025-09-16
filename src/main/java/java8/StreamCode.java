@@ -7,7 +7,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import commonCode.Utils;
+
 public class StreamCode {
+	
 	
 	static List<Employee> employeeList = Arrays.asList(
 		    new Employee(1, "Alice", "IT", 60000),
@@ -176,6 +179,31 @@ public class StreamCode {
 	}
 	
 	
+	public static void sortEmployeeBasedOnNameLength() {
+		
+//		List<String> empList = Arrays.asList("Apple", "Banana", "Kiwi", "Orange", "Jack Fruit");
+		
+		//USE comparing to arrange in order -> use at any Collections
+		//USE groupinBy to divide/segregate -> will produce map only
+		
+		List li = employeeList.stream()
+					.sorted(Comparator.comparingInt(e -> e.getEmployeeName().length())) // If List is Employee Object
+//					.sorted(Comparator.comparingInt(String::length)) //If list is Direct
+					.toList();
+		System.out.println("Sorted List Based on Length: " + li);
+	}
+	
+	public static void groupWordsByCases() {
+		List<String> words = Arrays.asList("apple", "cocoNut", "Banana", "GRAPES", "orange", "CARroT", "Muskmelon", "jackFruit","WATERMELON", "sapota", "GuAvA");
+		
+		Map<Object, List<String>> grouped = words.stream()
+			 .collect(Collectors.groupingBy(w -> Utils.classifyWord(w)));
+			 
+			 grouped.forEach(
+					 (wordCase, wordValue) -> System.out.println(wordCase+" : "+wordValue)
+					 );
+	}
+	
 	
 	
 	
@@ -185,22 +213,24 @@ public class StreamCode {
 	
 	
 	public static void main(String[] args) {
-		getHighestPaidEmployee();
-		getEmployeeByDepartment();
-		getCountOfEmployeesinEachDepartment();
-		getAvgSalaryOfEmployeeByDepartment();
-		litAllDepartments();
-		sortEmplBysalary();
-		secondHighestsalary();
-		salaryGreaterThan();
-		salarySum();
-		partitionedEmployeeOnsalary();
-		lowestInDeptsalary();
-		maxsalaryInDept();
-		getTop5Rankers();
-		testStreamCode();
-		getEmployeeByDeptSortGroup();
-		sortEmployeeBySalaryAndRemove4thHighestEmployee();
+		Utils.runWithSeparator(() -> getHighestPaidEmployee());
+	    Utils.runWithSeparator(() -> getEmployeeByDepartment());
+	    Utils.runWithSeparator(() -> getCountOfEmployeesinEachDepartment());
+	    Utils.runWithSeparator(() -> getAvgSalaryOfEmployeeByDepartment());
+	    Utils.runWithSeparator(() -> litAllDepartments());
+	    Utils.runWithSeparator(() -> sortEmplBysalary());
+	    Utils.runWithSeparator(() -> secondHighestsalary());
+	    Utils.runWithSeparator(() -> salaryGreaterThan());
+	    Utils.runWithSeparator(() -> salarySum());
+	    Utils.runWithSeparator(() -> partitionedEmployeeOnsalary());
+	    Utils.runWithSeparator(() -> lowestInDeptsalary());
+	    Utils.runWithSeparator(() -> maxsalaryInDept());
+	    Utils.runWithSeparator(() -> getTop5Rankers());
+	    Utils.runWithSeparator(() -> testStreamCode());
+	    Utils.runWithSeparator(() -> getEmployeeByDeptSortGroup());
+	    Utils.runWithSeparator(() -> sortEmployeeBySalaryAndRemove4thHighestEmployee());
+	    Utils.runWithSeparator(() -> sortEmployeeBasedOnNameLength());
+	    Utils.runWithSeparator(() -> groupWordsByCases());
 	}
 
 }
