@@ -572,6 +572,32 @@ public class StringSnippets {
 		 
 		 System.out.println("Sorted List According to Length: " + result.toString());
 	 }
+	 
+	 public static void stringReverseMatched() {
+		 
+		 String[] str1 = {"ABCDEFG"};
+		 String[] str2 = {"GFEDCBA"};
+		 
+		 //check String reverse is equal or not
+		 String s1 = str1[0]; // get the actual string
+		 String s2 = str2[0];
+		 boolean reversed = true;
+		
+		 
+		 for (int i = 0; i < s1.length(); i++) {
+			 char c1 = s1.charAt(i);
+	         char c2 = s2.charAt(s2.length() - 1 - i);
+	         
+	         if(c1 != c2) {
+				 reversed = false;
+			 }
+	         
+			}
+		 
+		 
+		 System.out.println("String Reversed Matched: " + reversed);
+		 
+	 }
 
 	
 
@@ -619,6 +645,8 @@ public class StringSnippets {
 		convertStringArrayToMapUsingAutoIncrementKey();
 		System.out.println("-------------------");
 		sortStringsByLength();
+		System.out.println("-------------------");
+		stringReverseMatched();
 		System.out.println("-------------------");
 		
 	}

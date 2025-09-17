@@ -3,8 +3,10 @@ package coding;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class NumberSnippets {
 
@@ -224,8 +226,20 @@ public class NumberSnippets {
 		System.out.println("Top 3 DESC Numbers: " + Arrays.toString(top3).replace("[", "{").replace("]", "}"));  // replace is optional just to convert [ to }
 	}
 	
-	
-	
+	public static void startsWith() {
+		int[] array1 = {1, 62, 3, 4, 6, 66, 8, 0};
+		int[] array2 = {4, 6, 7, 61, 0, 3};
+		
+		List<Integer> startsWithListDistinct = Stream.concat(
+		        Arrays.stream(array1).boxed(),
+		        Arrays.stream(array2).boxed()
+		).filter(num -> String.valueOf(num).startsWith("6"))
+		 .distinct()
+		 .collect(Collectors.toList());
+
+		System.out.println("Common Elements and starts with: " + startsWithListDistinct);
+		
+	}
 	
 	
 	
@@ -253,6 +267,8 @@ public class NumberSnippets {
 		checkPalindrome();
 		System.out.println("\n-------------------");
 		getTop3Numbers();
+		System.out.println("\n-------------------");
+		startsWith();
 		System.out.println("\n-------------------");
 	}
 
